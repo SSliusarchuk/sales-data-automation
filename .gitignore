@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environment
+.venv/
+venv/
+# Logs
+logs/
+*.log
+data/*.csv
+# Environment variables
+.env
+.env.example
