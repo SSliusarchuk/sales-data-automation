@@ -1,14 +1,14 @@
-# Автоматизация обработки кассовых данных для сети магазинов
+# Automated processing of cash register data for a retail chain
 
-Проект автоматизирует генерацию и загрузку данных о продажах для сети магазинов бытовых товаров.
+The project automates the generation and loading of sales data for a chain of household goods stores.
 
 ---
-1. Клонировать репозиторий:
+1. Clone the repository:
 ```bash
 git clone https://github.com/SSliusarchuk/auto-depl.sim.git
 cd auto-depl.sim
 ```
-2. Создать и активировать виртуальное окружение:
+2. Create and activate a virtual environment:
 ```bash
  python -m venv venv
 # Windows
@@ -16,51 +16,40 @@ venv\Scripts\activate
 # Linux / macOS
 source venv/bin/activate
 ```
-3. Установить зависимости: pip install -r requirements.txt
-4. Создать файл конфигураци и заполнить данные для подключения к БД:
+3. Install dependencies: pip install -r requirements.txt
+4. Create a configuration file and fill in database connection details::
 ```bash
-DB_NAME=<название_бд>
-DB_USER=<пользователь>
-DB_PASSWORD=<пароль>
-DB_HOST=<хост>
-DB_PORT=<порт>
+DB_NAME=<database_name>
+DB_USER=<user>
+DB_PASSWORD=<password>
+DB_HOST=<host>
+DB_PORT=<port>
 ```
-## Использование
-Генерация данных
+## Usage
+Data generation
 
-Скрипт generate_data.py создает CSV-файлы для N магазинов в папку data/:
-
+The generate_data.py script creates CSV files for N stores in the data/ folder:
 python scripts/generate_data.py
+Files are named in the format: {{shop_num}}_{{cash_num}}.csv
+One receipt can contain multiple items.
+Product categories: household chemicals, textiles, tableware, kitchen appliances, miscellaneous.
 
-Файлы имеют формат: {{shop_num}}_{{cash_num}}.csv
-
-Один чек может содержать несколько товаров.
-
-Категории товаров: бытовая химия, текстиль, посуда, кухонные приборы, прочее.
-
-Загрузка данных в базу
-
-Скрипт load_to_db.py обрабатывает CSV-файлы из папки data/ и сохраняет данные в базу:
-
+Loading data into the database
+The load_to_db.py script processes CSV files from the data/ folder and saves the data into the database:
 python scripts/load_to_db.py
+It skips files that do not match the required format.
+After successful upload, files are deleted..
 
-Пропускает файлы, не соответствующие формату.
+Automation on Windows
+For automatic daily execution, you can use Task Scheduler.
+Set up a task to run start.bat daily, except Sundays.
 
-После успешной загрузки файлы удаляются.
-Автоматизация
-Windows
+Database creation
 
-Для автоматического запуска каждый день можно использовать Планировщик задач.
+DDL commands for creating tables are located in the sql/ folder:
+receipts: receipt information
+items: items in receipts
 
-Настроить задачу для запуска start.bat ежедневно, кроме воскресенья.
-Создание базы данных
+Logs
 
-DDL-команды для создания таблиц находятся в папке sql/:
-
-receipts: информация о чеках
-
-items: позиции товаров в чеках
-
-Логи
-
-Скрипт load_to_db.py создает лог-файл в папке logs/ с информацией об обработке файлов и ошибках.
+The load_to_db.py script creates a log file in the logs/ folder containing processing information and errors.
