@@ -5,8 +5,8 @@ The project automates the generation and loading of sales data for a chain of ho
 ---
 1. Clone the repository:
 ```bash
-git clone https://github.com/SSliusarchuk/auto-depl.sim.git
-cd auto-depl.sim
+git clone https://github.com/SSliusarchuk/sales-data-automation.git
+
 ```
 2. Create and activate a virtual environment:
 ```bash
